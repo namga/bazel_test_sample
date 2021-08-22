@@ -3,6 +3,6 @@
 
 #include "lib_x.h"
 
-void lib_a_function(void);
+int lib_a_function(void);
 
 #endif

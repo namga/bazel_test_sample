@@ -1,11 +1,15 @@
 #include "gmock/gmock.h" 
 #include "lib_x_mock.h"
+#include "lib_a.h"
+
+using namespace ::testing;
+using ::testing::Return;
 
 class Test_lib_a : public ::testing::Test {
 
   protected:
 
-    LibXMock *LibXMockObj;
+    LibXMock LibXMockObj;
 
     Test_lib_a() {}
     
@@ -13,19 +17,20 @@ class Test_lib_a : public ::testing::Test {
 
     virtual void SetUp() 
     {
-      LibXMockObj = new LibXMock();
+
     }
 
     virtual void TearDown() 
     {
-      delete LibXMockObj;
+
     }
 };
 
 TEST_F(Test_lib_a, lib_a_function) 
 {
-  int result = LibXMockObj->lib_x_function();
-  ASSERT_EQ (0, result);
+  EXPECT_CALL(LibXMockObj, lib_x_function()).Times(1).WillOnce(Return(0));
+
+  EXPECT_EQ(0, LibXMockObj.lib_x_function());
 }
 
 int main(int argc, char** argv) 
